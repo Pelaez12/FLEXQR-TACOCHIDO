@@ -1,0 +1,173 @@
+@font-face { font-family: 'Carta Montserrat'; src: url('/fonts/montserrat-400.woff2') format('woff2'), url('/fonts/montserrat-400.ttf') format('truetype'); font-style: normal; font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Carta Montserrat'; src: url('/fonts/montserrat-600.woff2') format('woff2'), url('/fonts/montserrat-600.ttf') format('truetype'); font-style: normal; font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Carta Montserrat'; src: url('/fonts/montserrat-700.woff2') format('woff2'), url('/fonts/montserrat-700.ttf') format('truetype'); font-style: normal; font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Carta Super Little'; src: url('/fonts/super-little-titles.woff2') format('woff2'), url('/fonts/super-little-titles.ttf') format('truetype'); font-style: normal; font-weight: 400; font-display: swap; unicode-range: U+20, U+2E, U+30-39, U+41-5A, U+D3; }
+:root, [data-theme="light"], [data-theme="dark"] {
+  --font-brand: 'Carta Montserrat', Arial, sans-serif;
+  --font-main: 'Carta Montserrat', Arial, sans-serif;
+  --font-body: 'Carta Montserrat', Arial, sans-serif;
+  --color-brand-red: #df2018;
+  --color-brand-red-hover: #a31712;
+  --color-accent-gold: #ebae07;
+  --header-bg: #df2018;
+  --header-text: #fcf2e3;
+  --menu-header-height: 144px;
+}
+:root:not([data-theme="dark"]), [data-theme="light"] { --color-bg: #fcf2e3; --color-text-main: #211f1b; --color-text-muted: #625649; --color-brand-red-soft: #ffe3d8; color-scheme: light; }
+[data-theme="dark"] { --color-bg: #101010; --color-surface: #1b1b1b; --color-surface-elevated: #242424; --color-surface-hover: #292929; --color-border: #3b3b3b; --color-border-subtle: #303030; --color-text-main: #fcf2e3; --color-text-muted: #c7bfb5; --color-brand-red-soft: #3e1b18; color-scheme: dark; }
+html, body, #root, .taco-menu { background-color: var(--color-bg); color: var(--color-text-main); }
+body { font-family: var(--font-body); }
+button, input, textarea { font-family: var(--font-body); }
+.taco-menu { min-height: 100svh; padding-bottom: 0; }
+.taco-menu.has-cart > .footer-main { padding-bottom: calc(90px + env(safe-area-inset-bottom)); }
+.menu-skip { position: fixed; z-index: 120; top: 8px; left: 8px; padding: 12px; color: #211f1b; background: #fcf2e3; transform: translateY(-160%); }
+.menu-skip:focus { transform: none; }
+.header-container { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); height: var(--menu-header-height); gap: 8px; padding: 10px 16px; }
+.brand-info-wrap { display: flex; flex-direction: column; align-items: center; justify-self: center; gap: 4px; }
+.header-restaurant-tag { display: block; color: #fcf2e3; font-size: 12px; line-height: 1.4; font-weight: 600; letter-spacing: .035em; }
+.header-restaurant-tag.header-table-badge { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 6px 12px; border: 1.5px solid #fff; border-radius: 999px; color: #fff; background: transparent; font-size: 15px; font-weight: 700; line-height: 1.3; letter-spacing: .025em; white-space: nowrap; }
+.taco-table-picker { width: min(calc(100% - 24px), 680px); max-height: calc(100dvh - 24px); }
+.taco-table-picker > .taco-cart-head { position: sticky; top: 0; z-index: 4; background: var(--color-surface); }
+.taco-table-map-content { padding: 20px; }
+.taco-table-picker .table-confirm { z-index: 3; background: var(--color-surface); }
+.taco-table-picker .flow-primary { background: #df2018; }
+.taco-table-picker .floor-table.selected, .taco-table-picker .table-list-grid button[aria-pressed='true'] { background: #df2018; border-color: #df2018; }
+.taco-table-picker .table-list-grid button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+.taco-table-picker .linked-table-choice { width: 100%; min-height: 48px; margin-top: 16px; padding: 12px; border: 1px solid var(--color-border); border-radius: 8px; }
+.taco-table-picker :is(button, input):focus-visible { outline: 3px solid #fcf2e3; outline-offset: 2px; }
+@media (max-width: 360px) { .taco-table-map-content { padding: 16px; } .taco-table-picker .table-list-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.header-container .theme-toggle-btn { justify-self: start; width: 48px; height: 48px; color: #fcf2e3; background: transparent; border: 2px solid #211f1b; box-shadow: none; border-radius: 50%; transition: transform .18s; }
+.header-container .theme-toggle-btn:hover { background: transparent; }
+.header-container .theme-toggle-btn[data-theme-icon='sun'] { color: #ffe069; }
+.header-container .theme-toggle-btn[data-theme-icon='moon'] { color: #fff4cf; }
+.theme-toggle-btn svg { filter: drop-shadow(0 0 3px rgb(255 224 105 / 30%)); }
+.theme-toggle-btn[data-theme-icon='sun'] circle, .theme-toggle-btn[data-theme-icon='moon'] svg { fill: currentColor; }
+.header-container .theme-toggle-btn:active { transform: scale(.95); }
+.header-container .cart-header-btn { justify-self: end; min-width: 108px; min-height: 56px; padding: 8px 10px; gap: 9px; border-radius: 12px; background: #ebae07; color: #211f1b; box-shadow: none; transition: background .18s, transform .18s; }
+.header-container .cart-header-btn:hover { background: #f6c438; }
+.taco-cart-icon > svg { color: #211f1b; }
+.header-container .cart-header-btn:active { transform: scale(.97); }
+.taco-cart-icon { position: relative; display: grid; place-items: center; flex: none; animation: taco-cart-feedback .25s ease-out; }
+.taco-cart-icon .cart-badge-count { position: absolute; right: -6px; top: -8px; width: auto; min-width: 18px; height: 18px; padding: 0 4px; background: #a31712; color: #fff; font-size: 10px; }
+.taco-cart-caption { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.35; }
+.taco-cart-caption > span { font-size: 11px; font-weight: 600; }
+.taco-cart-caption strong { font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
+@keyframes taco-cart-feedback { from { transform: translateY(3px) scale(.9); } to { transform: translateY(0) scale(1); } }
+.taco-header-logo { display: block; flex: none; }
+.taco-header-logo img { width: 118px; height: auto; display: block; }
+.categories-nav-sticky { top: var(--menu-header-height); }
+.category-section { scroll-margin-top: calc(var(--menu-header-height) + 80px); }
+.toast-notification { top: calc(var(--menu-header-height) + 12px); }
+.search-input { font-size: 16px; min-height: 50px; }
+.category-pill-btn, .btn-add-product { min-height: 44px; }
+.search-input::placeholder { color: var(--color-text-muted); opacity: 1; }
+.taco-menu :is(a, button, input, textarea):focus-visible { outline: 3px solid #ebae07; outline-offset: 3px; }
+.header-main :is(a, button):focus-visible { outline-color: #fcf2e3; }
+.hero-image-wrap { height: 280px; }
+.hero-image-wrap { background: #df2018; }
+.hero-img { object-position: center 72%; }
+.hero-overlay { background: linear-gradient(90deg, rgb(33 31 27 / 87%) 0%, rgb(33 31 27 / 58%) 48%, rgb(33 31 27 / 8%) 100%); }
+.hero-title { font-family: 'Carta Super Little', 'Carta Montserrat', sans-serif; font-weight: 400; line-height: 1.5; letter-spacing: .045em; word-spacing: .08em; padding-block: 6px; font-size: clamp(28px, 5vw, 40px); font-kerning: none; text-shadow: none; }
+.hero-title > span { display: block; }
+.hero-tag { background: #ebae07; color: #211f1b; }
+.hero-subtitle { margin-bottom: 10px; }
+.category-title { font-weight: 700; line-height: 1.5; }
+.product-card-title, .product-name, .modal-sheet-title { font-family: var(--font-main); line-height: 1.5; overflow-wrap: anywhere; }
+.product-card-desc { font-size: 15px; line-height: 1.65; }
+.price-pending { font-size: 13px; color: var(--color-text-muted); }
+#section-bebidas .product-image-wrap { height: clamp(260px, 36vw, 320px); }
+.product-card-title { font-size: 18px; letter-spacing: .01em; }
+.modal-special-notes input, .modal-special-notes textarea { font-size: 16px; }
+.modal-sheet { max-height: calc(100dvh - 24px); overflow-y: auto; overscroll-behavior: contain; padding-bottom: env(safe-area-inset-bottom); }
+.modal-sheet-header { height: auto; flex-shrink: 0; }
+.modal-sheet-img { display: block; width: 100%; height: auto; max-height: 65dvh; object-fit: contain; object-position: center; }
+.modal-sheet-body, .modal-sheet-footer { flex-shrink: 0; }
+.product-modal-card > .modal-close-btn { position: sticky; top: 12px; align-self: flex-end; z-index: 3; flex: 0 0 44px; width: 44px; height: 44px; margin: 12px 12px -56px auto; background: rgb(0 0 0 / 80%); color: #fff; }
+@media (max-width: 540px) { .modal-sheet-footer { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; } .modal-sheet-footer > .cart-stepper { justify-self: center; } .modal-sheet-footer > .btn-confirm-add { width: 100%; min-width: 0; padding: 12px 10px; gap: 8px; justify-content: space-between; white-space: normal; font-size: 14px; } }
+.taco-cart-dialog { overscroll-behavior: contain; padding-bottom: env(safe-area-inset-bottom); }
+.product-card-img[src*="logo-red"], .modal-sheet-img[src*="logo-red"] { object-fit: contain; padding: 15%; background: #fcf2e3; }
+.cart-item-thumb { flex: none; width: 76px; height: 76px; object-fit: cover; }
+.cart-item-thumb[src*="logo-red"] { object-fit: contain; padding: 10px; background: #fcf2e3; }
+[data-theme="dark"] .product-card-img[src*="logo-red"], [data-theme="dark"] .modal-sheet-img[src*="logo-red"], [data-theme="dark"] .cart-item-thumb[src*="logo-red"] { background: #242424; }
+.product-card-img[src*="burrito-de-pastor"], .modal-sheet-img[src*="burrito-de-pastor"] { object-position: center 72%; }
+.btn-add-product, .cart-bar-btn { background: #df2018; color: #fff; }
+.btn-add-product:hover, .cart-bar-btn:hover { background: #a31712; }
+.taco-no-results { text-align: center; padding: 50px 20px; }
+.taco-no-results svg { margin: 0 auto 16px; }
+.taco-no-results button { margin-top: 16px; padding: 12px 18px; background: #df2018; color: #fff; border-radius: 8px; }
+.taco-cart-dialog { position: fixed; inset: 0 0 0 auto; width: min(100%, 480px); max-width: 100%; height: 100dvh; max-height: 100dvh; margin: 0 0 0 auto; padding: 0; border: 0; background: var(--color-surface); color: var(--color-text-main); }
+.taco-cart-dialog::backdrop { background: rgb(0 0 0 / 55%); }
+.taco-cart-head { display: flex; align-items: center; justify-content: space-between; padding: 20px; border-bottom: 1px solid var(--color-border); }
+.taco-cart-head h2 { font-size: 22px; font-weight: 700; }
+.taco-cart-head button, .cart-stepper button { min-width: 44px; min-height: 44px; display: grid; place-items: center; }
+.taco-cart-items { padding: 0 20px; }
+.cart-item { display: flex; gap: 12px; align-items: flex-start; }
+.cart-item-title { line-height: 1.5; }
+.taco-cart-empty { padding: 24px; line-height: 1.6; }
+.taco-cart-checkout { padding: 24px 20px; }
+.taco-cart-checkout > p { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.taco-cart-checkout small { font-size: 13px; color: var(--color-text-muted); }
+.taco-cart-send { display: block; text-align: center; padding: 14px; border-radius: 8px; background: #df2018; color: #fff; font-size: 14px; font-weight: 700; margin-top: 18px; }
+.taco-cart-clear { width: 100%; min-height: 44px; margin-top: 12px; color: var(--color-text-muted); }
+.taco-footer-contact { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; color: #fff; text-decoration: underline; text-underline-offset: 4px; font-size: 14px; }
+.taco-service-summary { max-width: 900px; margin: 0 auto; padding: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--color-border); }
+.taco-service-summary > span, .taco-cart-service { display: flex; align-items: center; gap: 10px; }
+.taco-service-summary > span { color: var(--color-text-main); }
+.taco-service-summary button { min-height: 44px; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 8px; font-size: 13px; }
+.taco-cart-service { padding: 16px 20px; font-size: 14px; font-weight: 700; border-bottom: 1px solid var(--color-border); }
+.taco-service-choices .service-profile-description { font-size: 14px; line-height: 1.65; }
+.taco-service-choices .service-profile-fee { font-size: 13px; }
+.taco-service-choices .service-profile-name { font-size: 20px; }
+html[data-order-screen='home'], html[data-order-screen='home'] body, html[data-order-screen='home'] #root { background: #101010; }
+.taco-menu.is-home { display: flex; flex-direction: column; min-height: 100dvh; padding-bottom: 0; background: #101010; color: #fcf2e3; --color-surface: #1b1b1b; --color-border: #3b3b3b; --color-text-main: #fcf2e3; --color-text-muted: #c7bfb5; color-scheme: dark; }
+.is-home .header-main { background: #101010; border: 0; box-shadow: none; }
+.is-home .header-container { height: 160px; padding-top: 28px; }
+.is-home .taco-header-logo img { width: 164px; }
+.is-home .header-restaurant-tag { font-size: 13px; color: #c7bfb5; margin-top: 4px; }
+.is-home .order-flow { flex: 1; padding-top: 24px; padding-bottom: 44px; }
+.is-home .flow-heading { margin-bottom: 32px; }
+.is-home .flow-heading h1 { letter-spacing: -.01em; line-height: 1.4; }
+.is-home .flow-heading p { line-height: 1.65; }
+.is-home .service-choices { max-width: 600px; gap: clamp(16px, 5vw, 40px); }
+.is-home .service-choice { max-width: 228px; }
+.is-home .footer-main { background: #101010; border-top: 1px solid #303030; color: #c7bfb5; padding-block: 24px; }
+.is-home .footer-container > strong { color: #fcf2e3; }
+.is-home .taco-footer-contact { color: #fff; }
+@media (max-width: 480px) { .is-home .header-container { height: 148px; padding-top: 20px; } .is-home .taco-header-logo img { width: 148px; } .is-home .order-flow { padding-inline: 20px; } }
+.taco-pickup-dialog { inset: 0; margin: auto; width: min(calc(100% - 32px), 500px); max-height: calc(100dvh - 32px); overflow-y: auto; border: 1px solid var(--color-border); border-radius: 12px; padding: 0; background: var(--color-surface); color: var(--color-text-main); overscroll-behavior: contain; }
+.taco-pickup-dialog::backdrop { background: rgb(0 0 0 / 70%); }
+.taco-pickup-content { padding: 24px; }
+.taco-pickup-content > svg { color: #df2018; margin-bottom: 18px; }
+.taco-pickup-content p { margin-bottom: 18px; font-size: 16px; line-height: 1.65; }
+.taco-pickup-content p:first-of-type { font-size: 20px; font-weight: 700; }
+.taco-cart-send:disabled { opacity: .5; cursor: not-allowed; }
+.table-links-page, .taco-error-page { width: min(100%, 680px); margin: 0 auto; padding: 40px 24px 60px; overflow-wrap: anywhere; }
+.table-links-page > img, .taco-error-page > img { display: block; height: auto; margin: 0 auto 28px; }
+.table-links-page h1, .taco-error-page h1 { font-size: clamp(26px, 5vw, 38px); line-height: 1.35; font-weight: 700; margin-bottom: 20px; }
+.table-links-page p, .taco-error-page p { font-size: 16px; line-height: 1.7; margin-bottom: 20px; }
+.table-links-page form { display: grid; gap: 12px; margin-block: 28px; }
+.table-links-page label { font-weight: 600; font-size: 15px; }
+.table-links-page :is(input, select) { width: 100%; min-width: 0; min-height: 48px; padding: 12px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface); color: var(--color-text-main); font-size: 16px; margin-bottom: 12px; }
+.table-links-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.table-links-actions > * { display: inline-flex; justify-content: center; align-items: center; min-height: 48px; padding: 12px 18px; border-radius: 8px; background: #df2018; color: #fff; font-weight: 600; }
+.table-links-page :focus-visible, .taco-error-page :focus-visible { outline: 3px solid #ebae07; outline-offset: 3px; }
+.taco-error-page { text-align: center; padding-top: 60px; }
+.taco-error-header { display: flex; justify-content: center; padding: 16px; background: #df2018; }
+.taco-error-header img { display: block; height: auto; }
+.taco-error-page > button, .taco-error-contact { display: block; margin-top: 20px; min-height: 44px; padding: 10px; text-decoration: underline; text-underline-offset: 4px; }
+.cart-stepper { display: flex; align-items: center; }
+.cart-stepper button:disabled { opacity: .4; }
+.intro-stage { width: min(calc(100% - 40px), 560px); height: 220px; }
+.intro-logo-face { width: clamp(220px, 65vw, 300px); height: auto; text-shadow: none; }
+.intro-question { font-size: clamp(22px, 5.6vw, 34px); line-height: 1.5; letter-spacing: .015em; font-weight: 700; color: #fcf2e3; }
+.intro-question > span { white-space: normal; letter-spacing: 0; }
+.intro-aura { position: absolute; inset: 0; opacity: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 48%, rgb(223 32 24 / 16%), transparent 58%); }
+.intro-joy { position: relative; display: inline-block; color: inherit; animation: taco-joy-glow 1.25s ease-out 2.15s both; }
+.intro-joy::after { content: attr(data-word); position: absolute; inset: 0; color: inherit; text-shadow: 0 0 10px rgb(252 242 227 / 95%), 0 0 24px rgb(252 242 227 / 65%); pointer-events: none; clip-path: polygon(-40% 0, -20% 0, -45% 100%, -65% 100%); animation: taco-joy-sheen .85s ease-in-out 2.3s both; }
+@keyframes taco-joy-sheen { from { clip-path: polygon(-40% 0, -20% 0, -45% 100%, -65% 100%); } to { clip-path: polygon(145% 0, 165% 0, 140% 100%, 120% 100%); } }
+@keyframes taco-joy-glow { 0%, 100% { text-shadow: 0 0 0 transparent; } 45% { text-shadow: 0 0 16px rgb(252 242 227 / 38%); } }
+.intro-dots { color: #df2018; }
+.intro-skip { min-height: 44px; color: #fcf2e3; }
+@media (min-width: 600px) { :root { --menu-header-height: 144px; } .taco-header-logo img { width: 128px; } .hero-image-wrap { height: 320px; } }
+@media (max-width: 360px) { :root { --menu-header-height: 132px; } .header-container { padding-inline: 12px; gap: 4px; } .taco-header-logo img { width: 104px; } .header-container .cart-header-btn { min-width: 88px; padding: 8px; gap: 5px; } .taco-cart-caption > span { font-size: 10px; } .taco-cart-caption strong { font-size: 14px; } .taco-cart-icon > svg { width: 22px; } .hero-title { font-size: 27px; letter-spacing: .035em; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
