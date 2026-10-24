@@ -12,7 +12,7 @@ export default function TableLinksPage() {
   return <main className="table-links-page">
     <img src="/taco-chido-logo-cream.png" width="150" height="85" alt="Taco Chido" />
     <p>Herramienta del restaurante</p><h1>Enlaces de pedido</h1>
-    <p>Crea un enlace por mesa para usarlo en su QR. El cliente verá la mesa asignada y no podrá cambiar su número desde la carta.</p>
+    <p>Crea un enlace por mesa para usarlo en su QR o chip NFC. La carta se abrirá automáticamente con la mesa asignada; el indicador permite abrir el mapa y elegir otra mesa.</p>
     <form onSubmit={event => event.preventDefault()} onChange={() => setCopied(false)}>
       <label htmlFor="link-base">Dirección de la carta digital</label>
       <input id="link-base" type="url" value={base} onChange={event => setBase(event.target.value)} required />

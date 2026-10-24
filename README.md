@@ -38,4 +38,3 @@ La entrada muestra el logo con una revelación gradual, el lema por líneas y un
 La pantalla de selección tiene fondo negro continuo, logo centrado y no muestra el carrito. Los controles de tema y pedido aparecen al entrar a una modalidad. El logo vuelve a la selección sin recargar, conservando el pedido y la mesa del enlace; desde allí se puede elegir mesa o pedir para llevar.
 
 Generador del restaurante: https://cartachida.comunidadfortaleza.com/generadordequerys. Ejemplo de mesa: https://cartachida.comunidadfortaleza.com/?mesa=01.
-
