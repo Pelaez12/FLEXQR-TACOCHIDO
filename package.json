@@ -6,14 +6,31 @@
   "scripts": {
     "dev": "vite --configLoader runner --port 8093 --host 127.0.0.1 --strictPort",
     "build": "tsc -b && vite build --configLoader runner",
-    "start": "vite preview --configLoader runner --port 8093 --host 127.0.0.1 --strictPort"
+    "start": "vite preview --configLoader runner --port 8093 --host 127.0.0.1 --strictPort",
+    "deploy": "cf deploy --prebuilt --mode production"
   },
   "dependencies": {
-    "class-variance-authority": "^0.7.1", "clsx": "^2.1.1", "lucide-react": "^0.475.0",
-    "motion": "^12.4.7", "react": "^18.3.1", "react-dom": "^18.3.1", "react-icons": "^5.5.0", "tailwind-merge": "^2.6.0"
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.475.0",
+    "motion": "^12.4.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.5.0",
+    "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
-    "@types/node": "^22.13.4", "@types/react": "^18.3.18", "@types/react-dom": "^18.3.5",
-    "@vitejs/plugin-react": "^4.3.4", "autoprefixer": "^10.4.20", "postcss": "^8.5.2", "tailwindcss": "^3.4.17", "typescript": "^5.7.3", "vite": "^6.1.0"
+    "@cloudflare/vite-plugin": "2.0.0-beta.v.4",
+    "@types/node": "^22.13.4",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "5.2.0",
+    "autoprefixer": "^10.4.20",
+    "cf": "1.0.0-beta.21",
+    "node": "24.22.1",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
+    "vite": "7.3.7"
   }
 }

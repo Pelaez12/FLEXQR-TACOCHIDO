@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { cloudflare } from '@cloudflare/vite-plugin';
 import { fileURLToPath } from 'node:url';
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), cloudflare()],
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
   build: { rollupOptions: { input: {
     carta: fileURLToPath(new URL('./index.html', import.meta.url)),
